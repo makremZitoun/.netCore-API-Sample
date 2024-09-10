@@ -1,9 +1,15 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>3.0"
+    }
+  }
+}
 provider "azurerm" {
   features {}
-  version = "~>3.0"
-  #subscription_id = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+ 
 }
-
 resource "azurerm_resource_group" "aks_rg" {
   name     = var.resource_group_name
   location = "East US"
