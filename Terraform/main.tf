@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  version = "3.84.0"
+  version = "~>3.0"
   #subscription_id = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 }
 
