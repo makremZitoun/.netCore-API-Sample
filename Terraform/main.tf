@@ -6,11 +6,20 @@ resource "azurerm_resource_group" "aks_rg" {
   name     = var.resource_group_name
   location = "East US"
 }
+resource "random_pet" "azurerm_kubernetes_cluster_name" {
+  prefix = "cluster"
+}
+
+resource "random_pet" "azurerm_kubernetes_cluster_dns_prefix" {
+  prefix = "dns"
+}
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
   name                = var.aks_name
   location            = azurerm_resource_group.aks_rg.location
   resource_group_name = azurerm_resource_group.aks_rg.name
+  dns_prefix          = random_pet.azurerm_kubernetes_cluster_dns_prefix.id
+
 
   default_node_pool {
     name       = "default"
