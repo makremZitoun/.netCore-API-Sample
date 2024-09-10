@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  subscription_id = '${{ secrets.AZURE_SUBSCRIPTION_ID }}'
+  subscription_id = "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 }
 
 resource "azurerm_resource_group" "aks_rg" {
