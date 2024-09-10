@@ -32,8 +32,8 @@ jobs:
         run: terraform validate -no-color
 
       # Terraform Plan (Optional: To review changes)
-      - name: "Terraform Plan"
-        run: terraform plan
+      #- name: "Terraform Plan"
+      #  run: terraform plan
 
       # Terraform Apply (Run automatically, requires confirmation bypass)
       - name: "Terraform Apply"
