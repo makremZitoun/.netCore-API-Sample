@@ -52,9 +52,9 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform plan
        
-      #- name: Terrform Destroy
-      #  id: destroy
-      #  run: terraform destroy -auto-approve
+      - name: Terrform Destroy
+        id: destroy
+        run: terraform destroy -auto-approve
 
       # Terraform Apply (Run automatically, requires confirmation bypass)
       - name: "Terraform Apply"
