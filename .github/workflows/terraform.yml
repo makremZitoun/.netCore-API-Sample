@@ -8,6 +8,11 @@ on:
 defaults:
   run:
     working-directory: ./Terraform
+env:
+  ARM_CLIENT_ID: '${{ secrets.AZURE_CLIENT_ID }}'
+  ARM_SUBSCRIPTION_ID: '${{ secrets.AZURE_SUBSCRIPTION_ID }}'
+  ARM_TENANT_ID: '${{ secrets.AZURE_TENANT_ID }}'
+  ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'    
 jobs:
   terraform:
     name: "Terraform Init and Apply"
@@ -31,11 +36,6 @@ jobs:
       # Terraform Validate
       - name: Terraform Validate
         id: validate
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform validate -no-color
 
       # Terraform Plan (Optional: To review changes)
@@ -48,9 +48,4 @@ jobs:
 
       # Terraform Apply (Run automatically, requires confirmation bypass)
       - name: "Terraform Apply"
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform apply -auto-approve
