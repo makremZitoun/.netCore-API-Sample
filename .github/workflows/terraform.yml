@@ -1,1 +1,45 @@
 
+name: Terraform CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master  # Run on changes to the main branch
+
+jobs:
+  terraform:
+    name: "Terraform Init and Apply"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository containing the Terraform code
+      - name: "Checkout Code"
+        uses: actions/checkout@v2
+
+      # Set up Terraform
+      - name: "Set up Terraform"
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0  # Specify the desired version
+
+      # Terraform Init
+      - name: "Terraform Init"
+        run: terraform init
+        
+      # Terraform Validate
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      # Terraform Plan (Optional: To review changes)
+      - name: "Terraform Plan"
+        run: terraform plan
+
+      # Terraform Apply (Run automatically, requires confirmation bypass)
+      - name: "Terraform Apply"
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: terraform apply -auto-approve
