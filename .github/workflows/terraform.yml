@@ -34,6 +34,10 @@ jobs:
       # Terraform Plan (Optional: To review changes)
       #- name: "Terraform Plan"
       #  run: terraform plan
+       
+      - name: Terrform Destroy
+        id: destroy
+        run: terraform destroy -auto-approve
 
       # Terraform Apply (Run automatically, requires confirmation bypass)
       - name: "Terraform Apply"
