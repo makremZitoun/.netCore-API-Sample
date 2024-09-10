@@ -6,7 +6,7 @@ permissions:
 env:
     IMAGE_NAME: makremzitoun/netcore-api
   
-on: push
+on: workflow_dispatch
 #workflow_dispatch
 jobs:
   push_to_registry:
