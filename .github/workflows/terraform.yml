@@ -7,7 +7,7 @@ on:
       - master  # Run on changes to the main branch
 defaults:
   run:
-    working-directory: ./terraform
+    working-directory: ./Terraform
 jobs:
   terraform:
     name: "Terraform Init and Apply"
