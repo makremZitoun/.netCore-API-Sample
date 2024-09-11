@@ -72,4 +72,7 @@ jobs:
       run: |
        kubectl get nodes
        kubectl apply -f ./deployPod.yaml
+       kubectl get deployments
+       kubectl get pods
+
       # kubectl set image deployment/my-api-deployment my-api-container=dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
