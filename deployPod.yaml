@@ -1,21 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apicore-deployment
+  name: my-api-deployment
   labels:
-    app: apicore-deployment
+    app: my-api
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: apicore
+      app: my-api
   template:
     metadata:
       labels:
-        app: apicore
+        app: my-api
     spec:
       containers:
-      - name: api-core
-        image: dotnetaksdemo.azurecr.io/my-api:latest
+      - name: my-api-container
+        image: dotnetaksdemo.azurecr.io/my-api:latest  # Replace with your ACR image
         ports:
         - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-api-service
+spec:
+  selector:
+    app: my-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
