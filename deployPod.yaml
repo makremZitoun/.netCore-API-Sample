@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: api-core
-        image: dotnetaksdemo.azurecr.io/netcore-api:latest
+        image: dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
         ports:
         - containerPort: 80
