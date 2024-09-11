@@ -39,8 +39,8 @@ jobs:
     # Build and push Docker image to ACR
     - name: Build and push Docker image to ACR
       run: |
-        docker build -t dotnetaksdemo.azurecr.io.azurecr.io/my-api:${{ github.sha }} .
-        docker push dotnetaksdemo.azurecr.io.azurecr.io/my-api:${{ github.sha }}
+        docker build -t dotnetaksdemo.azurecr.io/my-api:${{ github.sha }} .
+        docker push dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
