@@ -65,4 +65,7 @@ jobs:
     # Deploy the new image to AKS
     - name: Deploy to AKS
       run: |
-       kubectl set image deployment/my-api-deployment my-api-container=dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
+       kubectl get nodes
+       kubectl apply -f ./deployPod.yaml
+       Kubectl get deployments
+      # kubectl set image deployment/my-api-deployment my-api-container=dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
