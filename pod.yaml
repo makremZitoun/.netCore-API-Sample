@@ -1,44 +1,42 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-api-deployment
-  labels:
-    app: my-api
+  name: store-front
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: my-api
+      app: store-front
   template:
     metadata:
       labels:
-        app: my-api
+        app: store-front
     spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
       containers:
-      - name: my-api-container
-        image: dotnetaksdemo.azurecr.io/my-api:latest  # Utiliser l'image depuis ACR
+      - name: store-front
+        image: dotnetaksdemo.azurecr.io/my-api:latest
         ports:
-        - containerPort: 80
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
+        - containerPort: 8080
+          name: store-front
         resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
           requests:
-            memory: "256Mi"
-            cpu: "250m"
+            cpu: 1m
+            memory: 200Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-api-service
+  name: store-front
 spec:
-  selector:
-    app: my-api
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: store-front
   type: LoadBalancer
