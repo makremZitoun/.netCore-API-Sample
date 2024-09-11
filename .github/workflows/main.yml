@@ -63,6 +63,6 @@ jobs:
         az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 
     # Deploy the new image to AKS
-    #- name: Deploy to AKS
-     # run: |
-      #  kubectl set image deployment/my-api-deployment my-api-container=${{ secrets.ACR_NAME }}.azurecr.io/my-api:${{ github.sha }}
+    - name: Deploy to AKS
+      run: |
+       kubectl set image deployment/my-api-deployment my-api-container=dotnetaksdemo.azurecr.io/my-api:${{ github.sha }}
