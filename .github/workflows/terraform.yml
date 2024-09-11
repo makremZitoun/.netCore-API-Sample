@@ -1,10 +1,10 @@
 
 name: Terraform CI/CD Pipeline
 
-on:
-  push:
-    branches:
-      - master  # Run on changes to the main branch
+on: workflow_dispatch
+  #push:
+   # branches:
+    #  - master  # Run on changes to the main branch
 defaults:
   run:
     working-directory: ./Terraform
