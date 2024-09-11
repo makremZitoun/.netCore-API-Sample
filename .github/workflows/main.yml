@@ -61,6 +61,8 @@ jobs:
         echo "${{ secrets.AZURE_CREDENTIALS }}" > azure_credentials.json
         az login --service-principal -u "${{ secrets.AZURE_CLIENT_ID }}" -p "${{ secrets.AZURE_CLIENT_SECRET }}" --tenant "${{ secrets.AZURE_TENANT_ID }}"
         az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+        az aks update -n myAKSCluster -g myResourceGroup --attach-acr dotnetaksdemo
+
 
     # Deploy the new image to AKS
     - name: Deploy to AKS
