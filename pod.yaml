@@ -8,4 +8,4 @@ metadata:
 spec:
   containers:
    - name: apicore
-     image: dotnetaksdemo.azurecr.io/netcore-api:latest
+     image: dotnetaksdemo.azurecr.io/my-api:latest
